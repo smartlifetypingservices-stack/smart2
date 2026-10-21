@@ -6,6 +6,11 @@
   NODE_VERSION = "20"
 
 [[redirects]]
-  from = "/*"
+  from = "/sl-gate-2026"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

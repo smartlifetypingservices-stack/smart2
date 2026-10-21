@@ -37,7 +37,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       return {
         title: 'Smart Life Typing Services Sharjah | Family Visa, Emirates ID & MoHRE',
         description: 'Approved UAE government typing center in Abu Shagara & Al Majaz 1, Sharjah. Specialized in Family Residence Visas, Emirates ID, MoHRE Contracts, Golden Visa, Certificate Attestation & Passport Renewal.',
-        canonicalUrl: baseUrl,
+        canonicalUrl: `${baseUrl}/`,
         ogTitle: 'Smart Life Typing Services Sharjah | Family Visa & Government Documentation',
         ogDescription: 'Trusted government typing and visa center in Sharjah. 240+ 5-star Google reviews. Abu Shagara & Al Majaz 1 offices.',
         ogImage: PAGE_SHARE_IMAGES.home,
@@ -48,7 +48,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
         twitterImage: PAGE_SHARE_IMAGES.home,
         jsonLd: [
           LOCAL_BUSINESS_SCHEMA,
-          generateBreadcrumbSchema([{ name: 'Home', url: baseUrl }])
+          generateBreadcrumbSchema([{ name: 'Home', url: `${baseUrl}/` }])
         ]
       };
 
@@ -56,7 +56,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       return {
         title: 'Government Typing Services & Visa Fee Checklist | Smart Life Sharjah',
         description: 'Complete list of official government typing services in Sharjah: Family Visa Stamping, Tourist Visa, MoHRE Labour Contracts, Golden Visa Applications, MoFA Attestation, & Alhind Indian Passport Renewal.',
-        canonicalUrl: `${baseUrl}/#services`,
+        canonicalUrl: `${baseUrl}/services`,
         ogTitle: 'Government Typing Services & Visa Clearances | Smart Life Sharjah',
         ogDescription: '20+ government documentation services with transparent typing fees, required document lists, and online WhatsApp support.',
         ogImage: PAGE_SHARE_IMAGES.services,
@@ -78,8 +78,8 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
             "areaServed": "Sharjah & All Emirates, UAE"
           },
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'Services', url: `${baseUrl}/#services` }
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Services', url: `${baseUrl}/services` }
           ])
         ]
       };
@@ -88,7 +88,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       const targetService = SERVICES_DATA.find(s => s.id === articleSlug) || SERVICES_DATA[0];
       const serviceTitle = `${targetService.title} Sharjah | Smart Life Typing`;
       const serviceDesc = `${targetService.shortDesc} Fast typing & document processing in Sharjah. ${targetService.requiredDocuments.length} key required documents. Official processing time: ${targetService.processingTime}.`;
-      const serviceUrl = `${baseUrl}/#service/${targetService.id}`;
+      const serviceUrl = `${baseUrl}/services/${targetService.id}`;
 
       return {
         title: serviceTitle,
@@ -116,21 +116,19 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
             "areaServed": "Sharjah & All UAE Emirates"
           },
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'Services', url: `${baseUrl}/#services` },
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Services', url: `${baseUrl}/services` },
             { name: targetService.title, url: serviceUrl }
           ])
         ]
       };
     }
 
-
-
     case 'branches':
       return {
         title: 'Sharjah Branch Locations & Contact Details | Smart Life Typing',
         description: 'Visit our customer service counters in Abu Shagara (Mirza Building) and Al Majaz 1 (Safeer Building), Sharjah. Abu Shagara: All Days (No Holiday) | Al Majaz: All Days Except Sunday.',
-        canonicalUrl: `${baseUrl}/#branches`,
+        canonicalUrl: `${baseUrl}/branches`,
         ogTitle: 'Sharjah Branch Locations & Contact | Smart Life Typing',
         ogDescription: 'Abu Shagara Main Branch & Al Majaz 1 Branch 2. Direct phone, Google Maps directions, and working hours.',
         ogImage: PAGE_SHARE_IMAGES.branches,
@@ -142,8 +140,54 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
         jsonLd: [
           LOCAL_BUSINESS_SCHEMA,
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'Branches', url: `${baseUrl}/#branches` }
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Branches', url: `${baseUrl}/branches` }
+          ])
+        ]
+      };
+
+    case 'branch-abu-shagara':
+      return {
+        title: 'Smart Life Typing & Studio Abu Shagara Main Branch | Sharjah UAE',
+        description: 'Shop No. 3, Mirza Building, 14 Salem Bin Omair Street, Abu Shagara, Sharjah. Working Hours: 9:00 AM – 11:00 PM All Days. Call or WhatsApp +971 55 158 5570.',
+        canonicalUrl: `${baseUrl}/branches/abu-shagara`,
+        ogTitle: 'Smart Life Typing & Studio - Abu Shagara Main Branch',
+        ogDescription: 'Abu Shagara customer counter in Sharjah for Family Visa, Emirates ID, Indian Passport & Attestation.',
+        ogImage: PAGE_SHARE_IMAGES.branches,
+        ogType: 'place',
+        twitterCard: 'summary_large_image',
+        twitterTitle: 'Abu Shagara Branch | Smart Life Typing Sharjah',
+        twitterDescription: 'Visit Abu Shagara main branch for all typing & government visa services in Sharjah.',
+        twitterImage: PAGE_SHARE_IMAGES.branches,
+        jsonLd: [
+          LOCAL_BUSINESS_SCHEMA,
+          generateBreadcrumbSchema([
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Branches', url: `${baseUrl}/branches` },
+            { name: 'Abu Shagara Main Branch', url: `${baseUrl}/branches/abu-shagara` }
+          ])
+        ]
+      };
+
+    case 'branch-al-majaz':
+      return {
+        title: 'Smart Life Typing & Studio Al Majaz Branch | Sharjah UAE',
+        description: 'Safeer Building, Shop No. 2, Al Majaz 1, Sharjah. Working Hours: 8:00 AM – 8:00 PM (Monday-Saturday). Call or WhatsApp +971 50 229 0133.',
+        canonicalUrl: `${baseUrl}/branches/al-majaz`,
+        ogTitle: 'Smart Life Typing & Studio - Al Majaz Branch',
+        ogDescription: 'Al Majaz 1 branch in Sharjah for Family Visa, Amer, Tasheel, Emirates ID & Documentation.',
+        ogImage: PAGE_SHARE_IMAGES.branches,
+        ogType: 'place',
+        twitterCard: 'summary_large_image',
+        twitterTitle: 'Al Majaz Branch | Smart Life Typing Sharjah',
+        twitterDescription: 'Visit Al Majaz branch for quick typing and government documentation in Sharjah.',
+        twitterImage: PAGE_SHARE_IMAGES.branches,
+        jsonLd: [
+          LOCAL_BUSINESS_SCHEMA,
+          generateBreadcrumbSchema([
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Branches', url: `${baseUrl}/branches` },
+            { name: 'Al Majaz Branch', url: `${baseUrl}/branches/al-majaz` }
           ])
         ]
       };
@@ -152,7 +196,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       return {
         title: '240+ Verified 5-Star Google Reviews | Smart Life Typing Sharjah',
         description: 'Read real verified customer reviews and 4.9-star ratings for Smart Life Typing Services in Sharjah. See why 10,000+ residents trust us for fast visa and document clearances.',
-        canonicalUrl: `${baseUrl}/#reviews`,
+        canonicalUrl: `${baseUrl}/reviews`,
         ogTitle: '240+ Verified 5-Star Google Reviews | Smart Life Typing Sharjah',
         ogDescription: 'Top-rated government typing center in Sharjah with 4.9 stars across 240+ verified Google customer reviews.',
         ogImage: PAGE_SHARE_IMAGES.reviews,
@@ -176,8 +220,8 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
             "bestRating": "5"
           },
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'Reviews', url: `${baseUrl}/#reviews` }
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Reviews', url: `${baseUrl}/reviews` }
           ])
         ]
       };
@@ -186,7 +230,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       return {
         title: 'About Smart Life Typing Services | Official Government Partner Sharjah',
         description: 'Learn about Smart Life Typing Services in Sharjah, UAE. Over 10 years of professional government document typing, legal translation, and visa clearances.',
-        canonicalUrl: `${baseUrl}/#company`,
+        canonicalUrl: `${baseUrl}/company`,
         ogTitle: 'About Smart Life Typing Services | Official Sharjah Typing Center',
         ogDescription: 'Dedicated documentation specialists providing error-free typing, visa clearance, and customer satisfaction across all 7 Emirates.',
         ogImage: PAGE_SHARE_IMAGES.company,
@@ -197,8 +241,8 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
         twitterImage: PAGE_SHARE_IMAGES.company,
         jsonLd: [
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'About Us', url: `${baseUrl}/#company` }
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'About Us', url: `${baseUrl}/company` }
           ])
         ]
       };
@@ -207,7 +251,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       return {
         title: 'UAE Visa Rules & Government Guides 2026 | Smart Life Typing',
         description: 'Official guides and updates on Sharjah Family Residence Visa, Golden Visa rules, MoHRE Labour Contracts, Certificate Attestation, and Indian Passport Renewal.',
-        canonicalUrl: `${baseUrl}/#blog`,
+        canonicalUrl: `${baseUrl}/guides`,
         ogTitle: 'UAE Visa & Government Documentation Guides 2026 | Smart Life',
         ogDescription: 'Step-by-step legal guides written by document specialists in Sharjah, UAE.',
         ogImage: PAGE_SHARE_IMAGES.blog,
@@ -218,15 +262,15 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
         twitterImage: PAGE_SHARE_IMAGES.blog,
         jsonLd: [
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'Guides', url: `${baseUrl}/#blog` }
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Guides', url: `${baseUrl}/guides` }
           ])
         ]
       };
 
     case 'blog-article': {
       const article = BLOG_POSTS.find(p => p.slug === articleSlug) || BLOG_POSTS[0];
-      const articleUrl = `${baseUrl}/#guide/${article.slug}`;
+      const articleUrl = `${baseUrl}/guides/${article.slug}`;
       const articleTitle = `${article.title} | Smart Life Guide`;
       const articleDesc = article.summary;
 
@@ -245,8 +289,8 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
         jsonLd: [
           generateArticleSchema(article),
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'Guides', url: `${baseUrl}/#blog` },
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Guides', url: `${baseUrl}/guides` },
             { name: article.title, url: articleUrl }
           ])
         ]
@@ -257,7 +301,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       return {
         title: 'Frequently Asked Questions & Answers | Smart Life Typing Sharjah',
         description: 'Find clear answers to common questions on Sharjah family visa salary limits, medical fitness typing times, Emirates ID processing, MoFA attestation, and branch timings.',
-        canonicalUrl: `${baseUrl}/#faq`,
+        canonicalUrl: `${baseUrl}/faq`,
         ogTitle: 'Sharjah Visa & Typing FAQ | Smart Life Typing Services',
         ogDescription: 'Instant answers to your top UAE government typing and visa questions.',
         ogImage: PAGE_SHARE_IMAGES.faq,
@@ -269,8 +313,29 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
         jsonLd: [
           FAQ_SCHEMA,
           generateBreadcrumbSchema([
-            { name: 'Home', url: baseUrl },
-            { name: 'FAQ', url: `${baseUrl}/#faq` }
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'FAQ', url: `${baseUrl}/faq` }
+          ])
+        ]
+      };
+
+    case 'privacy':
+      return {
+        title: 'Privacy Policy | Smart Life Typing Services Sharjah',
+        description: 'Read the privacy policy of Smart Life Typing Services in Sharjah, UAE. Information on user data protection and privacy compliance.',
+        canonicalUrl: `${baseUrl}/privacy-policy`,
+        ogTitle: 'Privacy Policy | Smart Life Typing Services Sharjah',
+        ogDescription: 'Information on data handling and privacy compliance at Smart Life Typing Services.',
+        ogImage: PAGE_SHARE_IMAGES.home,
+        ogType: 'website',
+        twitterCard: 'summary_large_image',
+        twitterTitle: 'Privacy Policy | Smart Life Typing Services',
+        twitterDescription: 'Data privacy practices and compliance policy.',
+        twitterImage: PAGE_SHARE_IMAGES.home,
+        jsonLd: [
+          generateBreadcrumbSchema([
+            { name: 'Home', url: `${baseUrl}/` },
+            { name: 'Privacy Policy', url: `${baseUrl}/privacy-policy` }
           ])
         ]
       };
@@ -279,7 +344,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
       return {
         title: 'Smart Life Typing Services Sharjah | Family Visa & Government Documentation',
         description: 'Trusted UAE typing and visa center in Sharjah.',
-        canonicalUrl: baseUrl,
+        canonicalUrl: `${baseUrl}/`,
         ogTitle: 'Smart Life Typing Services Sharjah',
         ogDescription: 'Trusted UAE typing and visa center in Sharjah.',
         ogImage: PAGE_SHARE_IMAGES.home,

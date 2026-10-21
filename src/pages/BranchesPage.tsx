@@ -19,9 +19,26 @@ import {
 import { Branch } from '../types';
 import { submitNewInquiry, subscribeBranches } from '../firebase/dbServices';
 
-export const BranchesPage: React.FC = () => {
+interface BranchesPageProps {
+  selectedBranchSlug?: string | null;
+}
+
+export const BranchesPage: React.FC<BranchesPageProps> = ({ selectedBranchSlug }) => {
   const [branchesList, setBranchesList] = useState<Branch[]>(BRANCHES_DATA);
-  const [selectedBranchId, setSelectedBranchId] = useState<string>(BRANCHES_DATA[0].id);
+  const [selectedBranchId, setSelectedBranchId] = useState<string>(() => {
+    if (selectedBranchSlug) {
+      const match = BRANCHES_DATA.find(b => b.slug === selectedBranchSlug || b.id === selectedBranchSlug);
+      if (match) return match.id;
+    }
+    return BRANCHES_DATA[0].id;
+  });
+
+  useEffect(() => {
+    if (selectedBranchSlug) {
+      const match = branchesList.find(b => b.slug === selectedBranchSlug || b.id === selectedBranchSlug);
+      if (match) setSelectedBranchId(match.id);
+    }
+  }, [selectedBranchSlug, branchesList]);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',

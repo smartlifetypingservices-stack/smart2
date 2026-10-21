@@ -26,6 +26,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   }, []);
   const mainBranch = BRANCHES_DATA[0];
 
+  const getUrlForPage = (pageId: string, slug?: string) => {
+    switch (pageId) {
+      case 'home': return '/';
+      case 'services': return '/services';
+      case 'service-detail': return slug ? `/services/${slug}` : '/services';
+      case 'branches': return slug ? `/branches/${slug}` : '/branches';
+      case 'reviews': return '/reviews';
+      case 'company': return '/company';
+      case 'blog': return '/guides';
+      case 'blog-article': return slug ? `/guides/${slug}` : '/guides';
+      case 'faq': return '/faq';
+      case 'privacy': return '/privacy-policy';
+      default: return '/';
+    }
+  };
+
   const handleLinkClick = (pageId: string, slug?: string) => {
     onNavigate(pageId, slug);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -175,148 +191,172 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-slate-400">
               <li>
-                <button onClick={() => handleLinkClick('home')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/" onClick={(e) => { e.preventDefault(); handleLinkClick('home'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Home Overview
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('services')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services" onClick={(e) => { e.preventDefault(); handleLinkClick('services'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   All Government Services
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('branches')} className="hover:text-white transition-colors cursor-pointer text-left font-semibold text-blue-300">
+                <a href="/branches" onClick={(e) => { e.preventDefault(); handleLinkClick('branches'); }} className="hover:text-white transition-colors cursor-pointer text-left font-semibold text-blue-300 block">
                   Branches & Contact Page
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('reviews')} className="hover:text-white transition-colors cursor-pointer text-left text-amber-300">
+                <a href="/reviews" onClick={(e) => { e.preventDefault(); handleLinkClick('reviews'); }} className="hover:text-white transition-colors cursor-pointer text-left text-amber-300 block">
                   Google Verified Reviews
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('company')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/company" onClick={(e) => { e.preventDefault(); handleLinkClick('company'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   About Smart Life & Story
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('blog')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/guides" onClick={(e) => { e.preventDefault(); handleLinkClick('blog'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   UAE Visa & Govt Guides
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('faq')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/faq" onClick={(e) => { e.preventDefault(); handleLinkClick('faq'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Frequently Asked Questions
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('privacy')} className="hover:text-blue-300 font-medium transition-colors cursor-pointer text-left text-slate-400">
+                <a href="/privacy-policy" onClick={(e) => { e.preventDefault(); handleLinkClick('privacy'); }} className="hover:text-blue-300 font-medium transition-colors cursor-pointer text-left text-slate-400 block">
                   Privacy Policy & Data Protection
-                </button>
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Column 2: Popular Typing Services */}
           <div className="space-y-3">
-            <h4
-              onClick={() => handleLinkClick('services')}
-              className="font-extrabold text-white text-xs uppercase tracking-wider text-blue-400 flex items-center gap-1.5 cursor-pointer hover:underline"
+            <a
+              href="/services"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLinkClick('services');
+              }}
+              className="font-extrabold text-white text-xs uppercase tracking-wider text-blue-400 flex items-center gap-1.5 cursor-pointer hover:underline block"
               title="View all Services"
             >
               <FileText className="w-3.5 h-3.5" />
               <span>Typing Services</span>
-            </h4>
+            </a>
             <ul className="space-y-2 text-slate-400">
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'family-visa')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/family-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'family-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Family Residence Visa
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'tourist-visit-visa')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/tourist-visit-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'tourist-visit-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Tourist & Visit Visa Typing
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'labour-visa')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/labour-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'labour-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   MoHRE Labour Contracts
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'family-visa')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/family-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'family-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Golden Visa Applications
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'emirates-id-typing')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/emirates-id-typing" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'emirates-id-typing'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Emirates ID New / Renewal
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'certificate-attestation')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/certificate-attestation" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'certificate-attestation'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Degree & Certificate Attestation
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'company-setup-pro')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/company-setup-pro" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'company-setup-pro'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Trade License & Tasheel
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('service-detail', 'indian-passport-renewal')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="/services/indian-passport-renewal" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'indian-passport-renewal'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Indian Passport (Alhind) Renewal
-                </button>
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Column 4: Detailed Guides & Portals */}
           <div className="space-y-3">
-            <h4
-              onClick={() => handleLinkClick('blog')}
-              className="font-extrabold text-white text-xs uppercase tracking-wider text-blue-400 flex items-center gap-1.5 cursor-pointer hover:underline"
+            <a
+              href="/guides"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLinkClick('blog');
+              }}
+              className="font-extrabold text-white text-xs uppercase tracking-wider text-blue-400 flex items-center gap-1.5 cursor-pointer hover:underline block"
               title="View all Government Guides"
             >
               <BookOpen className="w-3.5 h-3.5" />
               <span>Government Guides</span>
-            </h4>
+            </a>
             <ul className="space-y-2 text-slate-400">
               <li>
-                <button
-                  onClick={() => handleLinkClick('blog-article', 'sharjah-family-visa-renewal-guide')}
-                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1"
+                <a
+                  href="/guides/sharjah-family-visa-renewal-guide"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick('blog-article', 'sharjah-family-visa-renewal-guide');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1 block"
                   title="Read Family Visa Renewal Guide"
                 >
                   Family Visa Renewal Guide
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => handleLinkClick('blog-article', 'uae-certificate-attestation-guide')}
-                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1"
+                <a
+                  href="/guides/uae-certificate-attestation-guide"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick('blog-article', 'uae-certificate-attestation-guide');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1 block"
                   title="Read Certificate Attestation Guide"
                 >
                   Certificate Attestation Guide
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => handleLinkClick('blog-article', 'indian-passport-renewal-uae-consular-guide')}
-                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1"
+                <a
+                  href="/guides/indian-passport-renewal-uae-consular-guide"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick('blog-article', 'indian-passport-renewal-uae-consular-guide');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1 block"
                   title="Read Alhind Indian Passport Guide"
                 >
                   Alhind Indian Passport Guide
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => handleLinkClick('blog-article', 'mohre-labour-contract-rules-uae')}
-                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1"
+                <a
+                  href="/guides/mohre-labour-contract-rules-uae"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick('blog-article', 'mohre-labour-contract-rules-uae');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer text-left line-clamp-1 block"
                   title="Read MoHRE Labour Contracts Guide"
                 >
                   MoHRE Labour Contracts Guide
-                </button>
+                </a>
               </li>
               <li className="pt-2">
                 <a

@@ -52,6 +52,20 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     return () => clearInterval(timer);
   }, [branchesList.length]);
 
+  const getPageUrl = (pageId: string) => {
+    switch (pageId) {
+      case 'home': return '/';
+      case 'services': return '/services';
+      case 'branches': return '/branches';
+      case 'reviews': return '/reviews';
+      case 'company': return '/company';
+      case 'blog': return '/guides';
+      case 'faq': return '/faq';
+      case 'privacy': return '/privacy-policy';
+      default: return '/';
+    }
+  };
+
   const handleNavClick = (pageId: string) => {
     onNavigate(pageId);
     setMobileMenuOpen(false);
@@ -158,8 +172,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
       {/* Main Header Navigation */}
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand Logo */}
-        <button
-          onClick={() => handleNavClick('home')}
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick('home');
+          }}
           className="flex items-center gap-2 sm:gap-2.5 group text-left cursor-pointer focus:outline-none min-w-0 shrink"
         >
           <div className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-lg bg-black flex items-center justify-center p-1 shadow-xs group-hover:bg-slate-800 transition-colors shrink-0">
@@ -179,31 +197,39 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               Typing & Government Services
             </p>
           </div>
-        </button>
+        </a>
 
         {/* Desktop Navigation Links Organized into Collections */}
         <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
           {/* Home Link */}
-          <button
-            onClick={() => handleNavClick('home')}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('home');
+            }}
             className={`px-3 py-2 text-xs xl:text-sm font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap ${currentPage === 'home'
                 ? 'bg-blue-50 text-blue-700 border border-blue-200/80 shadow-2xs'
                 : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100/80'
               }`}
           >
             Home
-          </button>
+          </a>
 
           {/* Services Catalog Link */}
-          <button
-            onClick={() => handleNavClick('services')}
+          <a
+            href="/services"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('services');
+            }}
             className={`px-3 py-2 text-xs xl:text-sm font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap ${currentPage === 'services'
                 ? 'bg-blue-50 text-blue-700 border border-blue-200/80 shadow-2xs'
                 : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100/80'
               }`}
           >
             Services Catalog
-          </button>
+          </a>
 
           {/* Collection Dropdowns */}
           {collections.map((group) => {
@@ -237,9 +263,13 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                         const isSubActive = currentPage === item.id;
 
                         return (
-                          <button
+                          <a
                             key={item.id}
-                            onClick={() => handleNavClick(item.id)}
+                            href={getPageUrl(item.id)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleNavClick(item.id);
+                            }}
                             className={`w-full text-left p-2.5 rounded-xl transition-all cursor-pointer flex items-start gap-3 group/item ${isSubActive
                                 ? 'bg-blue-50/80 border border-blue-200/80 text-blue-900'
                                 : 'hover:bg-slate-50 text-slate-800'
@@ -262,7 +292,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                                 {item.desc}
                               </p>
                             </div>
-                          </button>
+                          </a>
                         );
                       })}
                     </div>
@@ -273,8 +303,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           })}
 
           {/* Second Last: Google Reviews (Authentic Multi-Color Google Typography) */}
-          <button
-            onClick={() => handleNavClick('reviews')}
+          <a
+            href="/reviews"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('reviews');
+            }}
             className={`px-3 py-2 text-xs xl:text-sm font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${currentPage === 'reviews'
                 ? 'bg-slate-100 border border-slate-200 shadow-2xs'
                 : 'hover:bg-slate-100/80'
@@ -289,21 +323,23 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <span className="text-[#EA4335]">e</span>
               <span className="text-slate-700 font-semibold"> Reviews</span>
             </span>
-          </button>
+          </a>
 
           {/* Last: Branches & Contact Page */}
-          <button
-            onClick={() => handleNavClick('branches')}
+          <a
+            href="/branches"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('branches');
+            }}
             className={`px-3 py-2 text-xs xl:text-sm font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap ${currentPage === 'branches'
                 ? 'bg-blue-50 text-blue-700 border border-blue-200/80 shadow-2xs font-bold'
                 : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100/80'
               }`}
           >
             Branches & Contact
-          </button>
+          </a>
         </nav>
-
-
 
         {/* Mobile Menu Button */}
         <button
@@ -319,26 +355,34 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-slate-200 px-4 pt-3 pb-6 space-y-4 shadow-lg max-h-[80vh] overflow-y-auto">
           {/* Home Link */}
-          <button
-            onClick={() => handleNavClick('home')}
-            className={`w-full text-left px-3.5 py-2.5 text-sm font-bold rounded-xl transition-colors ${currentPage === 'home'
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('home');
+            }}
+            className={`w-full text-left px-3.5 py-2.5 text-sm font-bold rounded-xl transition-colors block ${currentPage === 'home'
                 ? 'bg-blue-50 text-blue-700 border border-blue-200'
                 : 'text-slate-800 hover:bg-slate-50'
               }`}
           >
             Home
-          </button>
+          </a>
 
           {/* Services Catalog Link */}
-          <button
-            onClick={() => handleNavClick('services')}
-            className={`w-full text-left px-3.5 py-2.5 text-sm font-bold rounded-xl transition-colors ${currentPage === 'services'
+          <a
+            href="/services"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('services');
+            }}
+            className={`w-full text-left px-3.5 py-2.5 text-sm font-bold rounded-xl transition-colors block ${currentPage === 'services'
                 ? 'bg-blue-50 text-blue-700 border border-blue-200'
                 : 'text-slate-800 hover:bg-slate-50'
               }`}
           >
             Services Catalog
-          </button>
+          </a>
           {collections.map((group) => (
             <div key={group.key} className="space-y-1.5 pt-1 border-t border-slate-100">
               <div className="px-3.5 text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
@@ -350,9 +394,13 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   const isSubActive = currentPage === item.id;
 
                   return (
-                    <button
+                    <a
                       key={item.id}
-                      onClick={() => handleNavClick(item.id)}
+                      href={getPageUrl(item.id)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(item.id);
+                      }}
                       className={`w-full text-left px-3.5 py-2.5 text-xs font-semibold rounded-xl flex items-center justify-between transition-colors ${isSubActive
                           ? 'bg-blue-50 text-blue-700 font-bold border border-blue-200'
                           : 'text-slate-700 hover:bg-slate-50'
@@ -363,7 +411,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                         <span>{item.label}</span>
                       </div>
                       <ArrowRight className="w-3.5 h-3.5 text-slate-300" />
-                    </button>
+                    </a>
                   );
                 })}
               </div>
@@ -373,8 +421,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           {/* Standalone Attention-Grabbing Google Reviews & Branches Items */}
           <div className="space-y-2 pt-2 border-t border-slate-100">
             {/* Google Reviews */}
-            <button
-              onClick={() => handleNavClick('reviews')}
+            <a
+              href="/reviews"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('reviews');
+              }}
               className={`w-full text-left px-3.5 py-2.5 text-xs font-bold rounded-xl flex items-center justify-between transition-colors ${currentPage === 'reviews'
                   ? 'bg-slate-100 border border-slate-200'
                   : 'hover:bg-slate-50'
@@ -390,11 +442,15 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 <span className="text-slate-700 font-semibold"> Reviews</span>
               </span>
               <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
-            </button>
+            </a>
 
             {/* Branches & Contact */}
-            <button
-              onClick={() => handleNavClick('branches')}
+            <a
+              href="/branches"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('branches');
+              }}
               className={`w-full text-left px-3.5 py-2.5 text-xs font-semibold rounded-xl flex items-center justify-between transition-colors ${currentPage === 'branches'
                   ? 'bg-blue-50 text-blue-700 font-bold border border-blue-200'
                   : 'text-slate-800 hover:bg-slate-50'
@@ -405,7 +461,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 <span>Branches & Contact</span>
               </div>
               <ArrowRight className="w-3.5 h-3.5 text-slate-300" />
-            </button>
+            </a>
           </div>
 
           {/* Mobile Direct Action Buttons */}

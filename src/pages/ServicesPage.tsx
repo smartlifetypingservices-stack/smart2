@@ -199,11 +199,17 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                     )}
                   </div>
 
-                  <h3 
-                    onClick={() => onNavigate && onNavigate('service-detail', service.id)}
-                    className="text-base font-bold text-slate-900 leading-snug cursor-pointer hover:text-blue-700 transition-colors line-clamp-2 min-h-[2.75rem] flex items-start"
-                  >
-                    {service.title}
+                  <h3 className="text-base font-bold text-slate-900 leading-snug line-clamp-2 min-h-[2.75rem] flex items-start">
+                    <a
+                      href={`/services/${service.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate && onNavigate('service-detail', service.id);
+                      }}
+                      className="hover:text-blue-700 transition-colors"
+                    >
+                      {service.title}
+                    </a>
                   </h3>
 
                   <p className="text-slate-600 text-xs leading-relaxed line-clamp-2 min-h-[2.25rem]">
@@ -250,13 +256,17 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 {/* Action Buttons */}
                 <div className="pt-4 mt-auto border-t border-slate-100 space-y-2 shrink-0">
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
-                    <button
-                      onClick={() => onSelectServiceDocs(service)}
+                    <a
+                      href={`/services/${service.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onSelectServiceDocs(service);
+                      }}
                       className="w-full sm:flex-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium py-2.5 sm:py-2 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer min-w-0"
                     >
                       <FileText className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                       <span className="truncate">View Docs Checklist</span>
-                    </button>
+                    </a>
                     <a
                       href={getWhatsAppLink({ serviceTitle: service.title })}
                       data-wa-location="Services Catalog Card"

@@ -26,6 +26,7 @@ export interface ServiceItem {
 
 export interface Branch {
   id: string;
+  slug?: string;
   name: string;
   isMain: boolean;
   address: string;

@@ -3,6 +3,7 @@ import { Branch } from '../types';
 export const BRANCHES_DATA: Branch[] = [
   {
     id: 'main-branch',
+    slug: 'abu-shagara',
     name: 'Smart Life Typing & Studio (Main Branch)',
     isMain: true,
     address: 'Shop No. 3, Mirza Building, 14 Salem Bin Omair Street, Abu Shagara',
@@ -24,6 +25,7 @@ export const BRANCHES_DATA: Branch[] = [
   },
   {
     id: 'branch-1',
+    slug: 'al-majaz',
     name: 'Smart Life Typing & Studio (Al Majaz Branch)',
     isMain: false,
     address: 'Safeer Building, Shop No. 2, Al Majaz 1',
