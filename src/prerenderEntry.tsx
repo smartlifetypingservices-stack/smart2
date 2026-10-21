@@ -14,35 +14,52 @@ import { FaqPage } from './pages/FaqPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { getSeoConfigForPage } from './utils/seoManager';
 
-export function renderPage(route: string): { html: string; title: string; description: string; canonical: string } {
+export interface PrerenderResult {
+  html: string;
+  title: string;
+  description: string;
+  canonical: string;
+  ogTitle: string;
+  ogDescription: string;
+  ogUrl: string;
+  twitterTitle: string;
+  twitterDescription: string;
+  ogImage: string;
+  twitterImage: string;
+}
+
+export function renderPage(route: string): PrerenderResult {
   let currentPage = 'home';
   let subId = '';
   let branchSlug: string | null = null;
 
-  if (route === '/' || route === '') {
+  // Normalize route by stripping trailing slash for page component matching
+  const cleanRoute = route.replace(/\/+$/, '') || '/';
+
+  if (cleanRoute === '/' || cleanRoute === '') {
     currentPage = 'home';
-  } else if (route === '/services') {
+  } else if (cleanRoute === '/services') {
     currentPage = 'services';
-  } else if (route.startsWith('/services/')) {
+  } else if (cleanRoute.startsWith('/services/')) {
     currentPage = 'service-detail';
-    subId = route.replace('/services/', '');
-  } else if (route === '/branches') {
+    subId = cleanRoute.replace('/services/', '');
+  } else if (cleanRoute === '/branches') {
     currentPage = 'branches';
-  } else if (route.startsWith('/branches/')) {
+  } else if (cleanRoute.startsWith('/branches/')) {
     currentPage = 'branches';
-    branchSlug = route.replace('/branches/', '');
-  } else if (route === '/reviews') {
+    branchSlug = cleanRoute.replace('/branches/', '');
+  } else if (cleanRoute === '/reviews') {
     currentPage = 'reviews';
-  } else if (route === '/company') {
+  } else if (cleanRoute === '/company') {
     currentPage = 'company';
-  } else if (route === '/guides') {
+  } else if (cleanRoute === '/guides') {
     currentPage = 'blog';
-  } else if (route.startsWith('/guides/')) {
+  } else if (cleanRoute.startsWith('/guides/')) {
     currentPage = 'blog-article';
-    subId = route.replace('/guides/', '');
-  } else if (route === '/faq') {
+    subId = cleanRoute.replace('/guides/', '');
+  } else if (cleanRoute === '/faq') {
     currentPage = 'faq';
-  } else if (route === '/privacy-policy') {
+  } else if (cleanRoute === '/privacy-policy') {
     currentPage = 'privacy';
   }
 
@@ -105,6 +122,13 @@ export function renderPage(route: string): { html: string; title: string; descri
     html: renderedContent,
     title: seoConfig.title,
     description: seoConfig.description,
-    canonical: seoConfig.canonicalUrl
+    canonical: seoConfig.canonicalUrl,
+    ogTitle: seoConfig.title,
+    ogDescription: seoConfig.description,
+    ogUrl: seoConfig.canonicalUrl,
+    twitterTitle: seoConfig.title,
+    twitterDescription: seoConfig.description,
+    ogImage: seoConfig.ogImage,
+    twitterImage: seoConfig.twitterImage
   };
 }

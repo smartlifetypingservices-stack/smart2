@@ -29,15 +29,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const getUrlForPage = (pageId: string, slug?: string) => {
     switch (pageId) {
       case 'home': return '/';
-      case 'services': return '/services';
-      case 'service-detail': return slug ? `/services/${slug}` : '/services';
-      case 'branches': return slug ? `/branches/${slug}` : '/branches';
-      case 'reviews': return '/reviews';
-      case 'company': return '/company';
-      case 'blog': return '/guides';
-      case 'blog-article': return slug ? `/guides/${slug}` : '/guides';
-      case 'faq': return '/faq';
-      case 'privacy': return '/privacy-policy';
+      case 'services': return '/services/';
+      case 'service-detail': return slug ? `/services/${slug}/` : '/services/';
+      case 'branches': return slug ? `/branches/${slug}/` : '/branches/';
+      case 'reviews': return '/reviews/';
+      case 'company': return '/company/';
+      case 'blog': return '/guides/';
+      case 'blog-article': return slug ? `/guides/${slug}/` : '/guides/';
+      case 'faq': return '/faq/';
+      case 'privacy': return '/privacy-policy/';
       default: return '/';
     }
   };
@@ -196,37 +196,37 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </a>
               </li>
               <li>
-                <a href="/services" onClick={(e) => { e.preventDefault(); handleLinkClick('services'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/" onClick={(e) => { e.preventDefault(); handleLinkClick('services'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   All Government Services
                 </a>
               </li>
               <li>
-                <a href="/branches" onClick={(e) => { e.preventDefault(); handleLinkClick('branches'); }} className="hover:text-white transition-colors cursor-pointer text-left font-semibold text-blue-300 block">
+                <a href="/branches/" onClick={(e) => { e.preventDefault(); handleLinkClick('branches'); }} className="hover:text-white transition-colors cursor-pointer text-left font-semibold text-blue-300 block">
                   Branches & Contact Page
                 </a>
               </li>
               <li>
-                <a href="/reviews" onClick={(e) => { e.preventDefault(); handleLinkClick('reviews'); }} className="hover:text-white transition-colors cursor-pointer text-left text-amber-300 block">
+                <a href="/reviews/" onClick={(e) => { e.preventDefault(); handleLinkClick('reviews'); }} className="hover:text-white transition-colors cursor-pointer text-left text-amber-300 block">
                   Google Verified Reviews
                 </a>
               </li>
               <li>
-                <a href="/company" onClick={(e) => { e.preventDefault(); handleLinkClick('company'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/company/" onClick={(e) => { e.preventDefault(); handleLinkClick('company'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   About Smart Life & Story
                 </a>
               </li>
               <li>
-                <a href="/guides" onClick={(e) => { e.preventDefault(); handleLinkClick('blog'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/guides/" onClick={(e) => { e.preventDefault(); handleLinkClick('blog'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   UAE Visa & Govt Guides
                 </a>
               </li>
               <li>
-                <a href="/faq" onClick={(e) => { e.preventDefault(); handleLinkClick('faq'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/faq/" onClick={(e) => { e.preventDefault(); handleLinkClick('faq'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Frequently Asked Questions
                 </a>
               </li>
               <li>
-                <a href="/privacy-policy" onClick={(e) => { e.preventDefault(); handleLinkClick('privacy'); }} className="hover:text-blue-300 font-medium transition-colors cursor-pointer text-left text-slate-400 block">
+                <a href="/privacy-policy/" onClick={(e) => { e.preventDefault(); handleLinkClick('privacy'); }} className="hover:text-blue-300 font-medium transition-colors cursor-pointer text-left text-slate-400 block">
                   Privacy Policy & Data Protection
                 </a>
               </li>
@@ -236,7 +236,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Column 2: Popular Typing Services */}
           <div className="space-y-3">
             <a
-              href="/services"
+              href="/services/"
               onClick={(e) => {
                 e.preventDefault();
                 handleLinkClick('services');
@@ -249,42 +249,37 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </a>
             <ul className="space-y-2 text-slate-400">
               <li>
-                <a href="/services/family-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'family-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/family-visa/" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'family-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Family Residence Visa
                 </a>
               </li>
               <li>
-                <a href="/services/tourist-visit-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'tourist-visit-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/tourist-visit-visa/" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'tourist-visit-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Tourist & Visit Visa Typing
                 </a>
               </li>
               <li>
-                <a href="/services/labour-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'labour-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/labour-visa/" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'labour-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   MoHRE Labour Contracts
                 </a>
               </li>
               <li>
-                <a href="/services/family-visa" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'family-visa'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
-                  Golden Visa Applications
-                </a>
-              </li>
-              <li>
-                <a href="/services/emirates-id-typing" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'emirates-id-typing'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/emirates-id-typing/" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'emirates-id-typing'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Emirates ID New / Renewal
                 </a>
               </li>
               <li>
-                <a href="/services/certificate-attestation" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'certificate-attestation'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/certificate-attestation/" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'certificate-attestation'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Degree & Certificate Attestation
                 </a>
               </li>
               <li>
-                <a href="/services/company-setup-pro" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'company-setup-pro'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/company-setup-pro/" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'company-setup-pro'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Trade License & Tasheel
                 </a>
               </li>
               <li>
-                <a href="/services/indian-passport-renewal" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'indian-passport-renewal'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
+                <a href="/services/indian-passport-renewal/" onClick={(e) => { e.preventDefault(); handleLinkClick('service-detail', 'indian-passport-renewal'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Indian Passport (Alhind) Renewal
                 </a>
               </li>
@@ -294,7 +289,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Column 4: Detailed Guides & Portals */}
           <div className="space-y-3">
             <a
-              href="/guides"
+              href="/guides/"
               onClick={(e) => {
                 e.preventDefault();
                 handleLinkClick('blog');
@@ -308,7 +303,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-2 text-slate-400">
               <li>
                 <a
-                  href="/guides/sharjah-family-visa-renewal-guide"
+                  href="/guides/sharjah-family-visa-renewal-guide/"
                   onClick={(e) => {
                     e.preventDefault();
                     handleLinkClick('blog-article', 'sharjah-family-visa-renewal-guide');
@@ -321,7 +316,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/uae-certificate-attestation-guide"
+                  href="/guides/uae-certificate-attestation-guide/"
                   onClick={(e) => {
                     e.preventDefault();
                     handleLinkClick('blog-article', 'uae-certificate-attestation-guide');
@@ -334,7 +329,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/indian-passport-renewal-uae-consular-guide"
+                  href="/guides/indian-passport-renewal-uae-consular-guide/"
                   onClick={(e) => {
                     e.preventDefault();
                     handleLinkClick('blog-article', 'indian-passport-renewal-uae-consular-guide');
@@ -347,7 +342,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/mohre-labour-contract-rules-uae"
+                  href="/guides/mohre-labour-contract-rules-uae/"
                   onClick={(e) => {
                     e.preventDefault();
                     handleLinkClick('blog-article', 'mohre-labour-contract-rules-uae');

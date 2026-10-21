@@ -5,11 +5,124 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Admin Secret Access Route
 [[redirects]]
   from = "/sl-gate-2026"
   to = "/index.html"
   status = 200
 
+# 301 Redirects: Standardize no-slash URLs to trailing slash in a single hop
+[[redirects]]
+  from = "/services"
+  to = "/services/"
+  status = 301
+
+[[redirects]]
+  from = "/branches"
+  to = "/branches/"
+  status = 301
+
+[[redirects]]
+  from = "/reviews"
+  to = "/reviews/"
+  status = 301
+
+[[redirects]]
+  from = "/company"
+  to = "/company/"
+  status = 301
+
+[[redirects]]
+  from = "/guides"
+  to = "/guides/"
+  status = 301
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy/"
+  status = 301
+
+[[redirects]]
+  from = "/branches/abu-shagara"
+  to = "/branches/abu-shagara/"
+  status = 301
+
+[[redirects]]
+  from = "/branches/al-majaz"
+  to = "/branches/al-majaz/"
+  status = 301
+
+[[redirects]]
+  from = "/services/family-visa"
+  to = "/services/family-visa/"
+  status = 301
+
+[[redirects]]
+  from = "/services/tourist-visit-visa"
+  to = "/services/tourist-visit-visa/"
+  status = 301
+
+[[redirects]]
+  from = "/services/labour-visa"
+  to = "/services/labour-visa/"
+  status = 301
+
+[[redirects]]
+  from = "/services/indian-passport-renewal"
+  to = "/services/indian-passport-renewal/"
+  status = 301
+
+[[redirects]]
+  from = "/services/certificate-attestation"
+  to = "/services/certificate-attestation/"
+  status = 301
+
+[[redirects]]
+  from = "/services/emirates-id-typing"
+  to = "/services/emirates-id-typing/"
+  status = 301
+
+[[redirects]]
+  from = "/services/company-setup-pro"
+  to = "/services/company-setup-pro/"
+  status = 301
+
+[[redirects]]
+  from = "/services/saudi-visa-typing"
+  to = "/services/saudi-visa-typing/"
+  status = 301
+
+[[redirects]]
+  from = "/services/police-clearance-certificate"
+  to = "/services/police-clearance-certificate/"
+  status = 301
+
+[[redirects]]
+  from = "/guides/sharjah-family-visa-renewal-guide"
+  to = "/guides/sharjah-family-visa-renewal-guide/"
+  status = 301
+
+[[redirects]]
+  from = "/guides/uae-certificate-attestation-guide"
+  to = "/guides/uae-certificate-attestation-guide/"
+  status = 301
+
+[[redirects]]
+  from = "/guides/indian-passport-renewal-uae-consular-guide"
+  to = "/guides/indian-passport-renewal-uae-consular-guide/"
+  status = 301
+
+[[redirects]]
+  from = "/guides/mohre-labour-contract-rules-uae"
+  to = "/guides/mohre-labour-contract-rules-uae/"
+  status = 301
+
+# Fallback: Real 404 for non-existent URLs
 [[redirects]]
   from = "/*"
   to = "/404.html"

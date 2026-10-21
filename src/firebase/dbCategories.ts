@@ -132,20 +132,25 @@ export const subscribeCategories = (onData: (categories: CategoryItem[]) => void
           onData(DEFAULT_CATEGORIES);
         }
       }, (err) => {
-        console.warn('Firestore categories listener error, using local fallback:', err);
+        if (import.meta.env.DEV) console.warn('Firestore categories listener error, using local fallback:', err);
         handleLocalUpdate();
       });
     } catch (e) {
-      console.warn('Failed setting Firestore categories listener:', e);
+      if (import.meta.env.DEV) console.warn('Failed setting Firestore categories listener:', e);
     }
   }
 
   handleLocalUpdate();
-  fetch('/api/get-cms-data').then(res => res.json()).then(json => {
-    if (json.success && json.data && json.data.categories && Array.isArray(json.data.categories)) {
-      handleLocalUpdate(json.data.categories);
-    }
-  }).catch(() => {});
+  if (typeof window !== 'undefined') {
+    fetch('/api/get-cms-data')
+      .then(res => (res.ok ? res.json() : null))
+      .then(json => {
+        if (json && json.success && json.data && json.data.categories && Array.isArray(json.data.categories)) {
+          handleLocalUpdate(json.data.categories);
+        }
+      })
+      .catch(() => {});
+  }
 
   const handleEvent = () => handleLocalUpdate();
   window.addEventListener('smartlife_categories_updated', handleEvent);

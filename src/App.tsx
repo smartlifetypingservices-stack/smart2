@@ -223,38 +223,38 @@ function MainContent() {
     if (page === 'service-detail' && slugOrId) {
       setSelectedServiceId(slugOrId);
       setCurrentPage('service-detail');
-      targetPath = `/services/${slugOrId}`;
+      targetPath = `/services/${slugOrId}/`;
     } else if (page === 'blog-article' && slugOrId) {
       setActiveArticleSlug(slugOrId);
       setCurrentPage('blog-article');
-      targetPath = `/guides/${slugOrId}`;
+      targetPath = `/guides/${slugOrId}/`;
     } else if (page === 'services') {
       setCurrentPage('services');
-      targetPath = '/services';
+      targetPath = '/services/';
     } else if (page === 'branches') {
       if (slugOrId) {
         setSelectedBranchSlug(slugOrId);
-        targetPath = `/branches/${slugOrId}`;
+        targetPath = `/branches/${slugOrId}/`;
       } else {
         setSelectedBranchSlug(null);
-        targetPath = '/branches';
+        targetPath = '/branches/';
       }
       setCurrentPage('branches');
     } else if (page === 'reviews') {
       setCurrentPage('reviews');
-      targetPath = '/reviews';
+      targetPath = '/reviews/';
     } else if (page === 'company') {
       setCurrentPage('company');
-      targetPath = '/company';
+      targetPath = '/company/';
     } else if (page === 'blog') {
       setCurrentPage('blog');
-      targetPath = '/guides';
+      targetPath = '/guides/';
     } else if (page === 'faq') {
       setCurrentPage('faq');
-      targetPath = '/faq';
+      targetPath = '/faq/';
     } else if (page === 'privacy') {
       setCurrentPage('privacy');
-      targetPath = '/privacy-policy';
+      targetPath = '/privacy-policy/';
     } else {
       setCurrentPage('home');
       targetPath = '/';

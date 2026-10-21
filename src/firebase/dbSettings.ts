@@ -118,13 +118,18 @@ export const subscribeGeneralSettings = (onData: (settings: GeneralSettings) => 
   // Always emit initial local value immediately
   onData(getStoredLocalSettings());
 
-  fetch('/api/get-cms-data').then(res => res.json()).then(json => {
-    if (json.success && json.data && json.data.settings) {
-      const cloudSettings = { ...DEFAULT_GENERAL_SETTINGS, ...json.data.settings };
-      saveStoredLocalSettings(cloudSettings);
-      onData(cloudSettings);
-    }
-  }).catch(() => { });
+  if (typeof window !== 'undefined') {
+    fetch('/api/get-cms-data')
+      .then(res => (res.ok ? res.json() : null))
+      .then(json => {
+        if (json && json.success && json.data && json.data.settings) {
+          const cloudSettings = { ...DEFAULT_GENERAL_SETTINGS, ...json.data.settings };
+          saveStoredLocalSettings(cloudSettings);
+          onData(cloudSettings);
+        }
+      })
+      .catch(() => { });
+  }
 
   let unsubFirestore: (() => void) | null = null;
 
@@ -138,10 +143,10 @@ export const subscribeGeneralSettings = (onData: (settings: GeneralSettings) => 
           onData(remoteSettings);
         }
       }, (e) => {
-        console.warn('Firestore subscribeGeneralSettings error:', e);
+        if (import.meta.env.DEV) console.warn('Firestore subscribeGeneralSettings error:', e);
       });
     } catch (e) {
-      console.warn('Failed setting up Firestore listener for settings:', e);
+      if (import.meta.env.DEV) console.warn('Failed setting up Firestore listener for settings:', e);
     }
   }
 

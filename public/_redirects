@@ -1,2 +1,31 @@
+# Admin Secret Access Route
 /sl-gate-2026    /index.html   200
+
+# 301 Redirects: Standardize no-slash URLs to trailing slash in a single hop
+/services        /services/        301
+/branches        /branches/        301
+/reviews         /reviews/         301
+/company         /company/         301
+/guides          /guides/          301
+/faq             /faq/             301
+/privacy-policy  /privacy-policy/  301
+
+# Sub-paths (Branches, Services, Guides)
+/branches/abu-shagara                          /branches/abu-shagara/                          301
+/branches/al-majaz                             /branches/al-majaz/                             301
+/services/family-visa                          /services/family-visa/                          301
+/services/tourist-visit-visa                   /services/tourist-visit-visa/                   301
+/services/labour-visa                          /services/labour-visa/                          301
+/services/indian-passport-renewal              /services/indian-passport-renewal/              301
+/services/certificate-attestation              /services/certificate-attestation/              301
+/services/emirates-id-typing                   /services/emirates-id-typing/                   301
+/services/company-setup-pro                    /services/company-setup-pro/                    301
+/services/saudi-visa-typing                    /services/saudi-visa-typing/                    301
+/services/police-clearance-certificate         /services/police-clearance-certificate/         301
+/guides/sharjah-family-visa-renewal-guide      /guides/sharjah-family-visa-renewal-guide/      301
+/guides/uae-certificate-attestation-guide      /guides/uae-certificate-attestation-guide/      301
+/guides/indian-passport-renewal-uae-consular-guide  /guides/indian-passport-renewal-uae-consular-guide/  301
+/guides/mohre-labour-contract-rules-uae        /guides/mohre-labour-contract-rules-uae/        301
+
+# Fallback: Real 404 for non-existent URLs
 /*               /404.html     404

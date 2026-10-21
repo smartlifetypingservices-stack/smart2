@@ -11,10 +11,10 @@ export const LOCAL_BUSINESS_SCHEMA = {
   "@graph": [
     {
       "@type": "LocalBusiness",
-      "@id": `${SITE_DOMAIN}/branches/abu-shagara`,
+      "@id": `${SITE_DOMAIN}/branches/abu-shagara/`,
       "name": "Smart Life Typing & Studio - Abu Shagara Main Branch",
       "alternateName": "Smart Life Typing Sharjah",
-      "url": `${SITE_DOMAIN}/branches/abu-shagara`,
+      "url": `${SITE_DOMAIN}/branches/abu-shagara/`,
       "logo": `${SITE_DOMAIN}/logo.png`,
       "description": "Trusted UAE-based typing, visa, photo studio, and government services provider in Abu Shagara, Sharjah. Specialized in Family Visa, Medical Fitness, Emirates ID, SEWA, MoHRE, Attestation, and Indian Passport services.",
       "telephone": "+971-55-158-5570",
@@ -74,9 +74,9 @@ export const LOCAL_BUSINESS_SCHEMA = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": `${SITE_DOMAIN}/branches/al-majaz`,
+      "@id": `${SITE_DOMAIN}/branches/al-majaz/`,
       "name": "Smart Life Typing & Studio - Al Majaz Branch",
-      "url": `${SITE_DOMAIN}/branches/al-majaz`,
+      "url": `${SITE_DOMAIN}/branches/al-majaz/`,
       "telephone": "+971-50-229-0133",
       "sameAs": [
         "https://share.google/rIhEXUZKW3lbeGl2o"
@@ -137,12 +137,12 @@ export function generateArticleSchema(post: BlogPost) {
     "author": {
       "@type": "Organization",
       "name": post.author,
-      "url": SITE_DOMAIN
+      "url": `${SITE_DOMAIN}/`
     },
     "publisher": {
       "@type": "Organization",
       "name": "Smart Life Typing Services Sharjah",
-      "url": SITE_DOMAIN,
+      "url": `${SITE_DOMAIN}/`,
       "logo": {
         "@type": "ImageObject",
         "url": `${SITE_DOMAIN}/logo.png`
@@ -150,7 +150,7 @@ export function generateArticleSchema(post: BlogPost) {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `${SITE_DOMAIN}/guides/${post.slug}`
+      "@id": `${SITE_DOMAIN}/guides/${post.slug}/`
     },
     "about": {
       "@type": "GovernmentService",
@@ -166,7 +166,7 @@ export function generateGovernmentServiceSchema(service: ServiceItem) {
   return {
     "@context": "https://schema.org",
     "@type": "GovernmentService",
-    "@id": `${SITE_DOMAIN}/services/${service.id}`,
+    "@id": `${SITE_DOMAIN}/services/${service.id}/`,
     "name": `${service.title} Sharjah`,
     "serviceType": service.categoryLabel || "Government Typing & Documentation",
     "description": service.shortDesc,
@@ -184,7 +184,7 @@ export function generateGovernmentServiceSchema(service: ServiceItem) {
       "@type": "AdministrativeArea",
       "name": "Sharjah & All UAE Emirates"
     },
-    "termsOfService": `${SITE_DOMAIN}/services/${service.id}`,
+    "termsOfService": `${SITE_DOMAIN}/services/${service.id}/`,
     "serviceOutput": service.title,
     "offers": {
       "@type": "Offer",
@@ -218,28 +218,28 @@ export function generateXmlSitemap(dynamicServices?: ServiceItem[], dynamicBlogs
 
   // Main Landing Pages
   xml += `  <url>\n    <loc>${SITE_DOMAIN}/</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${SITE_DOMAIN}/services</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${SITE_DOMAIN}/branches</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${SITE_DOMAIN}/reviews</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${SITE_DOMAIN}/company</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${SITE_DOMAIN}/guides</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${SITE_DOMAIN}/faq</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${SITE_DOMAIN}/privacy-policy</loc>\n  </url>\n`;
+  xml += `  <url>\n    <loc>${SITE_DOMAIN}/services/</loc>\n  </url>\n`;
+  xml += `  <url>\n    <loc>${SITE_DOMAIN}/branches/</loc>\n  </url>\n`;
+  xml += `  <url>\n    <loc>${SITE_DOMAIN}/reviews/</loc>\n  </url>\n`;
+  xml += `  <url>\n    <loc>${SITE_DOMAIN}/company/</loc>\n  </url>\n`;
+  xml += `  <url>\n    <loc>${SITE_DOMAIN}/guides/</loc>\n  </url>\n`;
+  xml += `  <url>\n    <loc>${SITE_DOMAIN}/faq/</loc>\n  </url>\n`;
+  xml += `  <url>\n    <loc>${SITE_DOMAIN}/privacy-policy/</loc>\n  </url>\n`;
 
   // Branches
   BRANCHES_DATA.forEach(branch => {
     const slug = branch.slug || (branch.id === 'main-branch' ? 'abu-shagara' : 'al-majaz');
-    xml += `  <url>\n    <loc>${SITE_DOMAIN}/branches/${slug}</loc>\n  </url>\n`;
+    xml += `  <url>\n    <loc>${SITE_DOMAIN}/branches/${slug}/</loc>\n  </url>\n`;
   });
 
   // Dynamic Service Deep Linking URLs
   servicesList.forEach(service => {
-    xml += `  <url>\n    <loc>${SITE_DOMAIN}/services/${service.id}</loc>\n  </url>\n`;
+    xml += `  <url>\n    <loc>${SITE_DOMAIN}/services/${service.id}/</loc>\n  </url>\n`;
   });
 
   // Blog Guides Articles
   blogsList.forEach(post => {
-    xml += `  <url>\n    <loc>${SITE_DOMAIN}/guides/${post.slug}</loc>\n  </url>\n`;
+    xml += `  <url>\n    <loc>${SITE_DOMAIN}/guides/${post.slug}/</loc>\n  </url>\n`;
   });
 
   xml += `</urlset>`;

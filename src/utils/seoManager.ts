@@ -17,54 +17,51 @@ export interface PageSeoConfig {
   jsonLd?: object[];
 }
 
-// Crisp, professional share preview images curated specifically for each section
+// Single easy-to-change branded 1200x630 share image value
+export const DEFAULT_OG_IMAGE = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop';
+
 export const PAGE_SHARE_IMAGES = {
-  home: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
-  services: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1200&auto=format&fit=crop',
-  documents: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200&auto=format&fit=crop',
-  branches: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop',
-  reviews: 'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200&auto=format&fit=crop',
-  company: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200&auto=format&fit=crop',
-  blog: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200&auto=format&fit=crop',
-  faq: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
+  home: DEFAULT_OG_IMAGE,
+  services: DEFAULT_OG_IMAGE,
+  documents: DEFAULT_OG_IMAGE,
+  branches: DEFAULT_OG_IMAGE,
+  reviews: DEFAULT_OG_IMAGE,
+  company: DEFAULT_OG_IMAGE,
+  blog: DEFAULT_OG_IMAGE,
+  faq: DEFAULT_OG_IMAGE
 };
 
 export function getSeoConfigForPage(pageKey: string, articleSlug?: string): PageSeoConfig {
   const baseUrl = SITE_DOMAIN;
 
+  let pageData: {
+    title: string;
+    description: string;
+    canonicalUrl: string;
+    ogType?: string;
+    jsonLd?: object[];
+  };
+
   switch (pageKey) {
     case 'home':
-      return {
+      pageData = {
         title: 'Smart Life Typing Services Sharjah | Family Visa, Emirates ID & MoHRE',
         description: 'Approved UAE government typing center in Abu Shagara & Al Majaz 1, Sharjah. Specialized in Family Residence Visas, Emirates ID, MoHRE Contracts, Golden Visa, Certificate Attestation & Passport Renewal.',
         canonicalUrl: `${baseUrl}/`,
-        ogTitle: 'Smart Life Typing Services Sharjah | Family Visa & Government Documentation',
-        ogDescription: 'Trusted government typing and visa center in Sharjah. 240+ 5-star Google reviews. Abu Shagara & Al Majaz 1 offices.',
-        ogImage: PAGE_SHARE_IMAGES.home,
         ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'Smart Life Typing Services Sharjah | Visa & Govt Solutions',
-        twitterDescription: 'Official government typing center in Sharjah. Family Visa, Emirates ID, MoHRE, & Attestation.',
-        twitterImage: PAGE_SHARE_IMAGES.home,
         jsonLd: [
           LOCAL_BUSINESS_SCHEMA,
           generateBreadcrumbSchema([{ name: 'Home', url: `${baseUrl}/` }])
         ]
       };
+      break;
 
     case 'services':
-      return {
+      pageData = {
         title: 'Government Typing Services & Visa Fee Checklist | Smart Life Sharjah',
         description: 'Complete list of official government typing services in Sharjah: Family Visa Stamping, Tourist Visa, MoHRE Labour Contracts, Golden Visa Applications, MoFA Attestation, & Alhind Indian Passport Renewal.',
-        canonicalUrl: `${baseUrl}/services`,
-        ogTitle: 'Government Typing Services & Visa Clearances | Smart Life Sharjah',
-        ogDescription: '20+ government documentation services with transparent typing fees, required document lists, and online WhatsApp support.',
-        ogImage: PAGE_SHARE_IMAGES.services,
+        canonicalUrl: `${baseUrl}/services/`,
         ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'UAE Government Typing Services | Smart Life Sharjah',
-        twitterDescription: 'Family Visas, Emirates ID, Labour Contracts, Golden Visa, and Attestation in Sharjah.',
-        twitterImage: PAGE_SHARE_IMAGES.services,
         jsonLd: [
           {
             "@context": "https://schema.org",
@@ -79,29 +76,23 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
           },
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Services', url: `${baseUrl}/services` }
+            { name: 'Services', url: `${baseUrl}/services/` }
           ])
         ]
       };
+      break;
 
     case 'service-detail': {
       const targetService = SERVICES_DATA.find(s => s.id === articleSlug) || SERVICES_DATA[0];
       const serviceTitle = `${targetService.title} Sharjah | Smart Life Typing`;
       const serviceDesc = `${targetService.shortDesc} Fast typing & document processing in Sharjah. ${targetService.requiredDocuments.length} key required documents. Official processing time: ${targetService.processingTime}.`;
-      const serviceUrl = `${baseUrl}/services/${targetService.id}`;
+      const serviceUrl = `${baseUrl}/services/${targetService.id}/`;
 
-      return {
+      pageData = {
         title: serviceTitle,
         description: serviceDesc,
         canonicalUrl: serviceUrl,
-        ogTitle: `${targetService.title} - Government Typing Sharjah`,
-        ogDescription: targetService.shortDesc,
-        ogImage: PAGE_SHARE_IMAGES.services,
         ogType: 'service',
-        twitterCard: 'summary_large_image',
-        twitterTitle: serviceTitle,
-        twitterDescription: targetService.shortDesc,
-        twitterImage: PAGE_SHARE_IMAGES.services,
         jsonLd: [
           {
             "@context": "https://schema.org",
@@ -117,94 +108,70 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
           },
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Services', url: `${baseUrl}/services` },
+            { name: 'Services', url: `${baseUrl}/services/` },
             { name: targetService.title, url: serviceUrl }
           ])
         ]
       };
+      break;
     }
 
     case 'branches':
-      return {
+      pageData = {
         title: 'Sharjah Branch Locations & Contact Details | Smart Life Typing',
         description: 'Visit our customer service counters in Abu Shagara (Mirza Building) and Al Majaz 1 (Safeer Building), Sharjah. Abu Shagara: All Days (No Holiday) | Al Majaz: All Days Except Sunday.',
-        canonicalUrl: `${baseUrl}/branches`,
-        ogTitle: 'Sharjah Branch Locations & Contact | Smart Life Typing',
-        ogDescription: 'Abu Shagara Main Branch & Al Majaz 1 Branch 2. Direct phone, Google Maps directions, and working hours.',
-        ogImage: PAGE_SHARE_IMAGES.branches,
+        canonicalUrl: `${baseUrl}/branches/`,
         ogType: 'place',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'Sharjah Office Locations | Smart Life Typing Services',
-        twitterDescription: 'Abu Shagara & Al Majaz 1 customer service counters in Sharjah, UAE.',
-        twitterImage: PAGE_SHARE_IMAGES.branches,
         jsonLd: [
           LOCAL_BUSINESS_SCHEMA,
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Branches', url: `${baseUrl}/branches` }
+            { name: 'Branches', url: `${baseUrl}/branches/` }
           ])
         ]
       };
+      break;
 
     case 'branch-abu-shagara':
-      return {
+      pageData = {
         title: 'Smart Life Typing & Studio Abu Shagara Main Branch | Sharjah UAE',
         description: 'Shop No. 3, Mirza Building, 14 Salem Bin Omair Street, Abu Shagara, Sharjah. Working Hours: 9:00 AM – 11:00 PM All Days. Call or WhatsApp +971 55 158 5570.',
-        canonicalUrl: `${baseUrl}/branches/abu-shagara`,
-        ogTitle: 'Smart Life Typing & Studio - Abu Shagara Main Branch',
-        ogDescription: 'Abu Shagara customer counter in Sharjah for Family Visa, Emirates ID, Indian Passport & Attestation.',
-        ogImage: PAGE_SHARE_IMAGES.branches,
+        canonicalUrl: `${baseUrl}/branches/abu-shagara/`,
         ogType: 'place',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'Abu Shagara Branch | Smart Life Typing Sharjah',
-        twitterDescription: 'Visit Abu Shagara main branch for all typing & government visa services in Sharjah.',
-        twitterImage: PAGE_SHARE_IMAGES.branches,
         jsonLd: [
           LOCAL_BUSINESS_SCHEMA,
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Branches', url: `${baseUrl}/branches` },
-            { name: 'Abu Shagara Main Branch', url: `${baseUrl}/branches/abu-shagara` }
+            { name: 'Branches', url: `${baseUrl}/branches/` },
+            { name: 'Abu Shagara Main Branch', url: `${baseUrl}/branches/abu-shagara/` }
           ])
         ]
       };
+      break;
 
     case 'branch-al-majaz':
-      return {
+      pageData = {
         title: 'Smart Life Typing & Studio Al Majaz Branch | Sharjah UAE',
         description: 'Safeer Building, Shop No. 2, Al Majaz 1, Sharjah. Working Hours: 8:00 AM – 8:00 PM (Monday-Saturday). Call or WhatsApp +971 50 229 0133.',
-        canonicalUrl: `${baseUrl}/branches/al-majaz`,
-        ogTitle: 'Smart Life Typing & Studio - Al Majaz Branch',
-        ogDescription: 'Al Majaz 1 branch in Sharjah for Family Visa, Amer, Tasheel, Emirates ID & Documentation.',
-        ogImage: PAGE_SHARE_IMAGES.branches,
+        canonicalUrl: `${baseUrl}/branches/al-majaz/`,
         ogType: 'place',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'Al Majaz Branch | Smart Life Typing Sharjah',
-        twitterDescription: 'Visit Al Majaz branch for quick typing and government documentation in Sharjah.',
-        twitterImage: PAGE_SHARE_IMAGES.branches,
         jsonLd: [
           LOCAL_BUSINESS_SCHEMA,
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Branches', url: `${baseUrl}/branches` },
-            { name: 'Al Majaz Branch', url: `${baseUrl}/branches/al-majaz` }
+            { name: 'Branches', url: `${baseUrl}/branches/` },
+            { name: 'Al Majaz Branch', url: `${baseUrl}/branches/al-majaz/` }
           ])
         ]
       };
+      break;
 
     case 'reviews':
-      return {
+      pageData = {
         title: '240+ Verified 5-Star Google Reviews | Smart Life Typing Sharjah',
         description: 'Read real verified customer reviews and 4.9-star ratings for Smart Life Typing Services in Sharjah. See why 10,000+ residents trust us for fast visa and document clearances.',
-        canonicalUrl: `${baseUrl}/reviews`,
-        ogTitle: '240+ Verified 5-Star Google Reviews | Smart Life Typing Sharjah',
-        ogDescription: 'Top-rated government typing center in Sharjah with 4.9 stars across 240+ verified Google customer reviews.',
-        ogImage: PAGE_SHARE_IMAGES.reviews,
+        canonicalUrl: `${baseUrl}/reviews/`,
         ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: '5-Star Google Reviews | Smart Life Typing Sharjah',
-        twitterDescription: 'Trusted typing and visa center in Sharjah backed by 240+ verified customer reviews.',
-        twitterImage: PAGE_SHARE_IMAGES.reviews,
         jsonLd: [
           {
             "@context": "https://schema.org",
@@ -212,7 +179,7 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
             "itemReviewed": {
               "@type": "LocalBusiness",
               "name": "Smart Life Typing Services Sharjah",
-              "image": PAGE_SHARE_IMAGES.reviews,
+              "image": DEFAULT_OG_IMAGE,
               "telephone": "+971-55-158-5570"
             },
             "ratingValue": "4.9",
@@ -221,140 +188,120 @@ export function getSeoConfigForPage(pageKey: string, articleSlug?: string): Page
           },
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Reviews', url: `${baseUrl}/reviews` }
+            { name: 'Reviews', url: `${baseUrl}/reviews/` }
           ])
         ]
       };
+      break;
 
     case 'company':
-      return {
+      pageData = {
         title: 'About Smart Life Typing Services | Official Government Partner Sharjah',
         description: 'Learn about Smart Life Typing Services in Sharjah, UAE. Over 10 years of professional government document typing, legal translation, and visa clearances.',
-        canonicalUrl: `${baseUrl}/company`,
-        ogTitle: 'About Smart Life Typing Services | Official Sharjah Typing Center',
-        ogDescription: 'Dedicated documentation specialists providing error-free typing, visa clearance, and customer satisfaction across all 7 Emirates.',
-        ogImage: PAGE_SHARE_IMAGES.company,
+        canonicalUrl: `${baseUrl}/company/`,
         ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'About Smart Life Typing Services Sharjah',
-        twitterDescription: 'Over 10 years of trusted government document processing in Sharjah, UAE.',
-        twitterImage: PAGE_SHARE_IMAGES.company,
         jsonLd: [
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'About Us', url: `${baseUrl}/company` }
+            { name: 'About Us', url: `${baseUrl}/company/` }
           ])
         ]
       };
+      break;
 
     case 'blog':
-      return {
+      pageData = {
         title: 'UAE Visa Rules & Government Guides 2026 | Smart Life Typing',
         description: 'Official guides and updates on Sharjah Family Residence Visa, Golden Visa rules, MoHRE Labour Contracts, Certificate Attestation, and Indian Passport Renewal.',
-        canonicalUrl: `${baseUrl}/guides`,
-        ogTitle: 'UAE Visa & Government Documentation Guides 2026 | Smart Life',
-        ogDescription: 'Step-by-step legal guides written by document specialists in Sharjah, UAE.',
-        ogImage: PAGE_SHARE_IMAGES.blog,
+        canonicalUrl: `${baseUrl}/guides/`,
         ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'UAE Visa & Government Guides 2026',
-        twitterDescription: 'Expert step-by-step guides for Sharjah family visas, attestation, & passport renewal.',
-        twitterImage: PAGE_SHARE_IMAGES.blog,
         jsonLd: [
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Guides', url: `${baseUrl}/guides` }
+            { name: 'Guides', url: `${baseUrl}/guides/` }
           ])
         ]
       };
+      break;
 
     case 'blog-article': {
       const article = BLOG_POSTS.find(p => p.slug === articleSlug) || BLOG_POSTS[0];
-      const articleUrl = `${baseUrl}/guides/${article.slug}`;
+      const articleUrl = `${baseUrl}/guides/${article.slug}/`;
       const articleTitle = `${article.title} | Smart Life Guide`;
       const articleDesc = article.summary;
 
-      return {
+      pageData = {
         title: articleTitle,
         description: articleDesc,
         canonicalUrl: articleUrl,
-        ogTitle: article.title,
-        ogDescription: articleDesc,
-        ogImage: PAGE_SHARE_IMAGES.blog,
         ogType: 'article',
-        twitterCard: 'summary_large_image',
-        twitterTitle: article.title,
-        twitterDescription: articleDesc,
-        twitterImage: PAGE_SHARE_IMAGES.blog,
         jsonLd: [
           generateArticleSchema(article),
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Guides', url: `${baseUrl}/guides` },
+            { name: 'Guides', url: `${baseUrl}/guides/` },
             { name: article.title, url: articleUrl }
           ])
         ]
       };
+      break;
     }
 
     case 'faq':
-      return {
+      pageData = {
         title: 'Frequently Asked Questions & Answers | Smart Life Typing Sharjah',
         description: 'Find clear answers to common questions on Sharjah family visa salary limits, medical fitness typing times, Emirates ID processing, MoFA attestation, and branch timings.',
-        canonicalUrl: `${baseUrl}/faq`,
-        ogTitle: 'Sharjah Visa & Typing FAQ | Smart Life Typing Services',
-        ogDescription: 'Instant answers to your top UAE government typing and visa questions.',
-        ogImage: PAGE_SHARE_IMAGES.faq,
+        canonicalUrl: `${baseUrl}/faq/`,
         ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'Sharjah Visa & Typing FAQ | Smart Life Services',
-        twitterDescription: 'Answers to family visa limits, medical typing, Emirates ID, and attestation.',
-        twitterImage: PAGE_SHARE_IMAGES.faq,
         jsonLd: [
           FAQ_SCHEMA,
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'FAQ', url: `${baseUrl}/faq` }
+            { name: 'FAQ', url: `${baseUrl}/faq/` }
           ])
         ]
       };
+      break;
 
     case 'privacy':
-      return {
+      pageData = {
         title: 'Privacy Policy | Smart Life Typing Services Sharjah',
         description: 'Read the privacy policy of Smart Life Typing Services in Sharjah, UAE. Information on user data protection and privacy compliance.',
-        canonicalUrl: `${baseUrl}/privacy-policy`,
-        ogTitle: 'Privacy Policy | Smart Life Typing Services Sharjah',
-        ogDescription: 'Information on data handling and privacy compliance at Smart Life Typing Services.',
-        ogImage: PAGE_SHARE_IMAGES.home,
+        canonicalUrl: `${baseUrl}/privacy-policy/`,
         ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'Privacy Policy | Smart Life Typing Services',
-        twitterDescription: 'Data privacy practices and compliance policy.',
-        twitterImage: PAGE_SHARE_IMAGES.home,
         jsonLd: [
           generateBreadcrumbSchema([
             { name: 'Home', url: `${baseUrl}/` },
-            { name: 'Privacy Policy', url: `${baseUrl}/privacy-policy` }
+            { name: 'Privacy Policy', url: `${baseUrl}/privacy-policy/` }
           ])
         ]
       };
+      break;
 
     default:
-      return {
+      pageData = {
         title: 'Smart Life Typing Services Sharjah | Family Visa & Government Documentation',
         description: 'Trusted UAE typing and visa center in Sharjah.',
         canonicalUrl: `${baseUrl}/`,
-        ogTitle: 'Smart Life Typing Services Sharjah',
-        ogDescription: 'Trusted UAE typing and visa center in Sharjah.',
-        ogImage: PAGE_SHARE_IMAGES.home,
-        ogType: 'website',
-        twitterCard: 'summary_large_image',
-        twitterTitle: 'Smart Life Typing Services Sharjah',
-        twitterDescription: 'Trusted UAE typing and visa center in Sharjah.',
-        twitterImage: PAGE_SHARE_IMAGES.home
+        ogType: 'website'
       };
+      break;
   }
+
+  return {
+    title: pageData.title,
+    description: pageData.description,
+    canonicalUrl: pageData.canonicalUrl,
+    ogTitle: pageData.title,
+    ogDescription: pageData.description,
+    ogImage: DEFAULT_OG_IMAGE,
+    ogType: pageData.ogType || 'website',
+    twitterCard: 'summary_large_image',
+    twitterTitle: pageData.title,
+    twitterDescription: pageData.description,
+    twitterImage: DEFAULT_OG_IMAGE,
+    jsonLd: pageData.jsonLd
+  };
 }
 
 // Applies metadata dynamically to document head tags
@@ -390,7 +337,7 @@ export function updateDomMetadata(config: PageSeoConfig) {
   setMeta('name', 'description', config.description);
   setLink('canonical', config.canonicalUrl);
 
-  // 3. OpenGraph Tags
+  // 3. OpenGraph Tags (Page-Specific)
   setMeta('property', 'og:title', config.ogTitle);
   setMeta('property', 'og:description', config.ogDescription);
   setMeta('property', 'og:image', config.ogImage);
@@ -398,13 +345,19 @@ export function updateDomMetadata(config: PageSeoConfig) {
   setMeta('property', 'og:type', config.ogType);
   setMeta('property', 'og:site_name', 'Smart Life Typing Services Sharjah');
 
-  // 4. Twitter Card Tags
+  // 4. Twitter Card Tags (Page-Specific)
   setMeta('name', 'twitter:card', config.twitterCard);
   setMeta('name', 'twitter:title', config.twitterTitle);
   setMeta('name', 'twitter:description', config.twitterDescription);
   setMeta('name', 'twitter:image', config.twitterImage);
 
-  // 5. Dynamic JSON-LD Scripts
+  // 5. Remove meta keywords from DOM if present
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (metaKeywords) {
+    metaKeywords.remove();
+  }
+
+  // 6. Dynamic JSON-LD Scripts
   const existingDynamicLds = document.querySelectorAll('script[data-seo-dynamic="true"]');
   existingDynamicLds.forEach(el => el.remove());
 

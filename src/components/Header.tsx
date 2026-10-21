@@ -55,13 +55,13 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   const getPageUrl = (pageId: string) => {
     switch (pageId) {
       case 'home': return '/';
-      case 'services': return '/services';
-      case 'branches': return '/branches';
-      case 'reviews': return '/reviews';
-      case 'company': return '/company';
-      case 'blog': return '/guides';
-      case 'faq': return '/faq';
-      case 'privacy': return '/privacy-policy';
+      case 'services': return '/services/';
+      case 'branches': return '/branches/';
+      case 'reviews': return '/reviews/';
+      case 'company': return '/company/';
+      case 'blog': return '/guides/';
+      case 'faq': return '/faq/';
+      case 'privacy': return '/privacy-policy/';
       default: return '/';
     }
   };
@@ -218,7 +218,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
           {/* Services Catalog Link */}
           <a
-            href="/services"
+            href="/services/"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('services');
@@ -304,7 +304,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
           {/* Second Last: Google Reviews (Authentic Multi-Color Google Typography) */}
           <a
-            href="/reviews"
+            href="/reviews/"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('reviews');
@@ -327,7 +327,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
           {/* Last: Branches & Contact Page */}
           <a
-            href="/branches"
+            href="/branches/"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('branches');
@@ -371,7 +371,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
           {/* Services Catalog Link */}
           <a
-            href="/services"
+            href="/services/"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('services');
@@ -422,7 +422,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           <div className="space-y-2 pt-2 border-t border-slate-100">
             {/* Google Reviews */}
             <a
-              href="/reviews"
+              href="/reviews/"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('reviews');
@@ -446,7 +446,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
             {/* Branches & Contact */}
             <a
-              href="/branches"
+              href="/branches/"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('branches');

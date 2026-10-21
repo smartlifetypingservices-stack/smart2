@@ -260,20 +260,25 @@ export const subscribeServices = (onData: (services: ServiceItem[]) => void): ((
         const liveList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as ServiceItem));
         handleUpdate(liveList);
       }, (err) => {
-        console.warn('Firestore services onSnapshot error, using local fallback:', err);
+        if (import.meta.env.DEV) console.warn('Firestore services onSnapshot error, using local fallback:', err);
         handleUpdate();
       });
     } catch (e) {
-      console.warn('Error setting up services listener:', e);
+      if (import.meta.env.DEV) console.warn('Error setting up services listener:', e);
     }
   }
 
   // Also fetch global cloud CMS data if Firestore is offline
-  fetch('/api/get-cms-data').then(res => res.json()).then(json => {
-    if (json.success && json.data && json.data.services && Array.isArray(json.data.services)) {
-      handleUpdate(json.data.services);
-    }
-  }).catch(() => { });
+  if (typeof window !== 'undefined') {
+    fetch('/api/get-cms-data')
+      .then(res => (res.ok ? res.json() : null))
+      .then(json => {
+        if (json && json.success && json.data && json.data.services && Array.isArray(json.data.services)) {
+          handleUpdate(json.data.services);
+        }
+      })
+      .catch(() => { });
+  }
 
   const handleLocalEvent = () => handleUpdate();
   handleUpdate();
@@ -751,15 +756,20 @@ export const subscribeBranches = (onData: (branches: Branch[]) => void): (() => 
         handleUpdate();
       });
     } catch (e) {
-      console.warn('Error subscribing to branches:', e);
+      if (import.meta.env.DEV) console.warn('Error subscribing to branches:', e);
     }
   }
 
-  fetch('/api/get-cms-data').then(res => res.json()).then(json => {
-    if (json.success && json.data && json.data.branches && Array.isArray(json.data.branches)) {
-      handleUpdate(json.data.branches);
-    }
-  }).catch(() => { });
+  if (typeof window !== 'undefined') {
+    fetch('/api/get-cms-data')
+      .then(res => (res.ok ? res.json() : null))
+      .then(json => {
+        if (json && json.success && json.data && json.data.branches && Array.isArray(json.data.branches)) {
+          handleUpdate(json.data.branches);
+        }
+      })
+      .catch(() => { });
+  }
 
   const handleLocalEvent = () => handleUpdate();
   handleUpdate();
@@ -830,15 +840,20 @@ export const subscribeFaqs = (onData: (faqs: FaqItem[]) => void): (() => void) =
         handleUpdate();
       });
     } catch (e) {
-      console.warn('Error subscribing to FAQs:', e);
+      if (import.meta.env.DEV) console.warn('Error subscribing to FAQs:', e);
     }
   }
 
-  fetch('/api/get-cms-data').then(res => res.json()).then(json => {
-    if (json.success && json.data && json.data.faqs && Array.isArray(json.data.faqs)) {
-      handleUpdate(json.data.faqs);
-    }
-  }).catch(() => { });
+  if (typeof window !== 'undefined') {
+    fetch('/api/get-cms-data')
+      .then(res => (res.ok ? res.json() : null))
+      .then(json => {
+        if (json && json.success && json.data && json.data.faqs && Array.isArray(json.data.faqs)) {
+          handleUpdate(json.data.faqs);
+        }
+      })
+      .catch(() => { });
+  }
 
   const handleLocalEvent = () => handleUpdate();
   handleUpdate();
